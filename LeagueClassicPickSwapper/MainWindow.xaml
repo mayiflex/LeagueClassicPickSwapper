@@ -1,0 +1,55 @@
+﻿<Window x:Class="LeagueClassicPickSwapper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LeagueClassicPickSwapper"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300" Width="419" ResizeMode="NoResize">
+    <StackPanel>
+        <TextBlock Text="League Classic Pick Swapper" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 10 0 10"/>
+        <TextBlock Text="League Status Message" x:Name="txtLeagueStatus" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 10"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label  Content="Summoner Name 1" x:Name="lblSummonerName0" Grid.Column="0" Margin="10 10 5 2"/>
+            <Button Content="Swap Picks"      x:Name="btnPick0"         Grid.Column="1" Margin="5 10 5 2"     Click="btnPick0_Click"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label  Content="Summoner Name 2" x:Name="lblSummonerName1" Grid.Column="0" Margin="10 2 5 2"/>
+            <Button Content="Swap Picks"      x:Name="btnPick1"         Grid.Column="1" Margin="5 2 5 2"     Click="btnPick1_Click"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label  Content="Summoner Name 3" x:Name="lblSummonerName2" Grid.Column="0" Margin="10 2 5 2"/>
+            <Button Content="Swap Picks"      x:Name="btnPick2"         Grid.Column="1" Margin="5 2 5 2"     Click="btnPick2_Click"/>
+           
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label  Content="Summoner Name 4" x:Name="lblSummonerName3" Grid.Column="0" Margin="10 2 5 2"/>
+            <Button Content="Swap Picks"      x:Name="btnPick3"         Grid.Column="1" Margin="5 2 5 2"     Click="btnPick3_Click"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label  Content="Summoner Name 5" x:Name="lblSummonerName4" Grid.Column="0" Margin="10 2 5 10"/>
+            <Button Content="Swap Picks"      x:Name="btnPick4"         Grid.Column="1" Margin="5 2 5 10"     Click="btnPick4_Click"/>
+        </Grid>
+        <TextBlock Text="" x:Name="txtSwapStatus" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 10"/>
+    </StackPanel>
+</Window>
