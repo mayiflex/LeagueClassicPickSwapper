@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeagueClassicPickSwapper", "LeagueClassicPickSwapper\LeagueClassicPickSwapper.csproj", "{FB9985EF-92D4-4B83-9DFF-A3C1F7E3B92A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mayLCU", "..\mayLCU SLN\mayLCU\mayLCU.csproj", "{9EFEAB5E-8659-10E1-591F-08042506BDA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FB9985EF-92D4-4B83-9DFF-A3C1F7E3B92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB9985EF-92D4-4B83-9DFF-A3C1F7E3B92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB9985EF-92D4-4B83-9DFF-A3C1F7E3B92A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EFEAB5E-8659-10E1-591F-08042506BDA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EFEAB5E-8659-10E1-591F-08042506BDA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EFEAB5E-8659-10E1-591F-08042506BDA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EFEAB5E-8659-10E1-591F-08042506BDA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
