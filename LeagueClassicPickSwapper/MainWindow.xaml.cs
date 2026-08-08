@@ -1,4 +1,4 @@
-﻿using LeagueClassicPickSwapper.DTO_s;
+using LeagueClassicPickSwapper.DTO_s;
 using mayLCU;
 using System.CodeDom;
 using System.Linq;
@@ -20,6 +20,8 @@ namespace LeagueClassicPickSwapper {
     /// </summary>
     public partial class MainWindow : Window {
         private (Label, Button)[] summonerElements = new (Label, Button)[5];
+        
+
         public MainWindow() {
             InitializeComponent();
             summonerElements = [
@@ -32,6 +34,23 @@ namespace LeagueClassicPickSwapper {
 
             LCU_Handler.Innit();
             RunUiUpdaterTask();
+            CheckForAppUpdates();
+        }
+
+        private async void CheckForAppUpdates() {
+            var (isUpdateAvailable, latestVersionTag) = await UpdateChecker.CheckForUpdatesAsync();
+            if (isUpdateAvailable) {
+                txtUpdateVersion.Text = latestVersionTag;
+                pnlUpdateNotice.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void linkUpdate_Click(object sender, RoutedEventArgs e) {
+            try {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(UpdateChecker.LatestReleaseUrl) { UseShellExecute = true });
+            } catch {
+                // Ignore if browser launch fails
+            }
         }
 
         private Task RunUiUpdaterTask() => Task.Run(() => {
