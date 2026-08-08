@@ -11,7 +11,7 @@ A Windows desktop application for sending pick-order swap requests in League Cla
 ## Preview
 
 <p align="center">
-  <img src="assets/preview.png" alt="League Classic Pick Swapper UI" width="500"/>
+  <img src="assets/preview.png" alt="League Classic Pick Swapper Preview" width="800"/>
 </p>
 
 ---

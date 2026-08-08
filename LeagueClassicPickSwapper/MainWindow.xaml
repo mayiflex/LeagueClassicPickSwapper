@@ -138,9 +138,9 @@
                     </StackPanel>
                 </Border>
 
-                <!-- 5 Summoner Cards (Height: 81px, Stride: 87px) -->
+                <!-- 5 Summoner Cards (Height: 80px, Stride: 87px, Gap: 7px) -->
                 <!-- Slot 0: Canvas Top = 54px -->
-                <Border Canvas.Top="54" Canvas.Left="8" Width="222" Height="81" Background="#2B2D31" CornerRadius="6" Padding="6 4">
+                <Border Canvas.Top="54" Canvas.Left="8" Width="222" Height="80" Background="#2B2D31" CornerRadius="6" Padding="6 4">
                     <Grid>
                         <TextBlock x:Name="lblSummonerName0" Text="Summoner 1" Foreground="#DBDEE1" FontSize="11" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0 0 85 0"/>
                         <Button Content="Swap Picks" x:Name="btnPick0" Style="{StaticResource DiscordButtonStyle}" Width="80" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPick0_Click"/>
@@ -148,7 +148,7 @@
                 </Border>
 
                 <!-- Slot 1: Canvas Top = 141px (54 + 87) -->
-                <Border Canvas.Top="141" Canvas.Left="8" Width="222" Height="81" Background="#2B2D31" CornerRadius="6" Padding="6 4">
+                <Border Canvas.Top="141" Canvas.Left="8" Width="222" Height="80" Background="#2B2D31" CornerRadius="6" Padding="6 4">
                     <Grid>
                         <TextBlock x:Name="lblSummonerName1" Text="Summoner 2" Foreground="#DBDEE1" FontSize="11" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0 0 85 0"/>
                         <Button Content="Swap Picks" x:Name="btnPick1" Style="{StaticResource DiscordButtonStyle}" Width="80" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPick1_Click"/>
@@ -156,7 +156,7 @@
                 </Border>
 
                 <!-- Slot 2: Canvas Top = 228px (141 + 87) -->
-                <Border Canvas.Top="228" Canvas.Left="8" Width="222" Height="81" Background="#2B2D31" CornerRadius="6" Padding="6 4">
+                <Border Canvas.Top="228" Canvas.Left="8" Width="222" Height="80" Background="#2B2D31" CornerRadius="6" Padding="6 4">
                     <Grid>
                         <TextBlock x:Name="lblSummonerName2" Text="Summoner 3" Foreground="#DBDEE1" FontSize="11" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0 0 85 0"/>
                         <Button Content="Swap Picks" x:Name="btnPick2" Style="{StaticResource DiscordButtonStyle}" Width="80" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPick2_Click"/>
@@ -164,7 +164,7 @@
                 </Border>
 
                 <!-- Slot 3: Canvas Top = 315px (228 + 87) -->
-                <Border Canvas.Top="315" Canvas.Left="8" Width="222" Height="81" Background="#2B2D31" CornerRadius="6" Padding="6 4">
+                <Border Canvas.Top="315" Canvas.Left="8" Width="222" Height="80" Background="#2B2D31" CornerRadius="6" Padding="6 4">
                     <Grid>
                         <TextBlock x:Name="lblSummonerName3" Text="Summoner 4" Foreground="#DBDEE1" FontSize="11" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0 0 85 0"/>
                         <Button Content="Swap Picks" x:Name="btnPick3" Style="{StaticResource DiscordButtonStyle}" Width="80" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPick3_Click"/>
@@ -172,7 +172,7 @@
                 </Border>
 
                 <!-- Slot 4: Canvas Top = 402px (315 + 87) -->
-                <Border Canvas.Top="402" Canvas.Left="8" Width="222" Height="81" Background="#2B2D31" CornerRadius="6" Padding="6 4">
+                <Border Canvas.Top="402" Canvas.Left="8" Width="222" Height="80" Background="#2B2D31" CornerRadius="6" Padding="6 4">
                     <Grid>
                         <TextBlock x:Name="lblSummonerName4" Text="Summoner 5" Foreground="#DBDEE1" FontSize="11" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0 0 85 0"/>
                         <Button Content="Swap Picks" x:Name="btnPick4" Style="{StaticResource DiscordButtonStyle}" Width="80" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPick4_Click"/>
