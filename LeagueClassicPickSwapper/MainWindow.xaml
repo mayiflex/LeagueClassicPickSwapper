@@ -5,59 +5,183 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LeagueClassicPickSwapper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="320" Width="419" ResizeMode="NoResize">
-    <StackPanel>
-        <Border x:Name="pnlUpdateNotice" Background="#1E293B" Visibility="Collapsed" Padding="6 4">
-            <TextBlock HorizontalAlignment="Center" FontSize="11" Foreground="#F8FAFC">
-                <Run Text="New version available: "/>
-                <Hyperlink x:Name="linkUpdate" Click="linkUpdate_Click" Foreground="#38BDF8" TextDecorations="Underline">
-                    <Run x:Name="txtUpdateVersion" Text="v1.1.0"/>
-                </Hyperlink>
-            </TextBlock>
-        </Border>
-        <TextBlock Text="League Classic Pick Swapper" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 10 0 10"/>
-        <TextBlock Text="League Status Message" x:Name="txtLeagueStatus" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 10"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label  Content="Summoner Name 1" x:Name="lblSummonerName0" Grid.Column="0" Margin="10 10 5 2"/>
-            <Button Content="Swap Picks"      x:Name="btnPick0"         Grid.Column="1" Margin="5 10 5 2"     Click="btnPick0_Click"/>
+        Title="League Classic Pick Swapper" Height="540" Width="240" 
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ResizeMode="NoResize">
+    
+    <Window.Resources>
+        <!-- Custom Button Style -->
+        <Style x:Key="DiscordButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#5865F2"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="4" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#4752C4"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#3C45A5"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#383A40"/>
+                                <Setter Property="Foreground" Value="#6D6F78"/>
+                                <Setter Property="Cursor" Value="Arrow"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Window Control Button Styles -->
+        <Style x:Key="WindowControlButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#949BA4"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#35373C"/>
+                                <Setter Property="Foreground" Value="#F2F3F5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="WindowCloseButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#949BA4"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="0 7 0 0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#DA373C"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!-- Main Window Outer Border with Vector ScaleTransform -->
+    <Border Background="#313338" CornerRadius="8" BorderBrush="#1F2023" BorderThickness="1" x:Name="mainBorder">
+        <Border.LayoutTransform>
+            <ScaleTransform x:Name="uiScale" ScaleX="1.0" ScaleY="1.0"/>
+        </Border.LayoutTransform>
+        
+        <Grid Width="238" Height="538">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Custom Discord Title Bar Header -->
+            <Border Grid.Row="0" Background="#1E1F22" CornerRadius="7 7 0 0" Height="26" MouseDown="TitleBar_MouseDown">
+                <Grid>
+                    <TextBlock Text="Pick Swapper" Foreground="#949BA4" FontSize="11" FontWeight="SemiBold" VerticalAlignment="Center" Margin="8 0 0 0"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="btnMinimize" Content="─" Click="btnMinimize_Click" Style="{StaticResource WindowControlButtonStyle}"/>
+                        <Button x:Name="btnClose" Content="✕" Click="btnClose_Click" Style="{StaticResource WindowCloseButtonStyle}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Update Banner -->
+            <Border x:Name="pnlUpdateNotice" Grid.Row="1" Background="#5865F2" Visibility="Collapsed" Padding="6 4">
+                <TextBlock HorizontalAlignment="Center" FontSize="11" Foreground="#FFFFFF" FontWeight="Medium">
+                    <Run Text="New update: "/>
+                    <Hyperlink x:Name="linkUpdate" Click="linkUpdate_Click" Foreground="#FFFFFF" TextDecorations="Underline">
+                        <Run x:Name="txtUpdateVersion" Text="v1.1.0"/>
+                    </Hyperlink>
+                </TextBlock>
+            </Border>
+
+            <!-- Main Roster Canvas -->
+            <Canvas Grid.Row="2">
+                <!-- Status Badge -->
+                <Border Canvas.Top="8" Canvas.Left="12" Width="214" Background="#2B2D31" CornerRadius="10" Padding="6 3">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Ellipse x:Name="dotStatus" Width="7" Height="7" Fill="#F23F43" Margin="0 0 5 0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Not Connected" x:Name="txtLeagueStatus" FontSize="11" FontWeight="Medium" Foreground="#B5BAC1" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 5 Summoner Cards (Height: 81px, Stride: 87px) -->
+                <!-- Slot 0: Canvas Top = 54px -->
+                <Border Canvas.Top="54" Canvas.Left="8" Width="222" Height="81" Background="#2B2D31" CornerRadius="6" Padding="6 4">
+                    <Grid>
+                        <TextBlock x:Name="lblSummonerName0" Text="Summoner 1" Foreground="#DBDEE1" FontSize="11" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0 0 85 0"/>
+                        <Button Content="Swap Picks" x:Name="btnPick0" Style="{StaticResource DiscordButtonStyle}" Width="80" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPick0_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- Slot 1: Canvas Top = 141px (54 + 87) -->
+                <Border Canvas.Top="141" Canvas.Left="8" Width="222" Height="81" Background="#2B2D31" CornerRadius="6" Padding="6 4">
+                    <Grid>
+                        <TextBlock x:Name="lblSummonerName1" Text="Summoner 2" Foreground="#DBDEE1" FontSize="11" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0 0 85 0"/>
+                        <Button Content="Swap Picks" x:Name="btnPick1" Style="{StaticResource DiscordButtonStyle}" Width="80" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPick1_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- Slot 2: Canvas Top = 228px (141 + 87) -->
+                <Border Canvas.Top="228" Canvas.Left="8" Width="222" Height="81" Background="#2B2D31" CornerRadius="6" Padding="6 4">
+                    <Grid>
+                        <TextBlock x:Name="lblSummonerName2" Text="Summoner 3" Foreground="#DBDEE1" FontSize="11" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0 0 85 0"/>
+                        <Button Content="Swap Picks" x:Name="btnPick2" Style="{StaticResource DiscordButtonStyle}" Width="80" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPick2_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- Slot 3: Canvas Top = 315px (228 + 87) -->
+                <Border Canvas.Top="315" Canvas.Left="8" Width="222" Height="81" Background="#2B2D31" CornerRadius="6" Padding="6 4">
+                    <Grid>
+                        <TextBlock x:Name="lblSummonerName3" Text="Summoner 4" Foreground="#DBDEE1" FontSize="11" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0 0 85 0"/>
+                        <Button Content="Swap Picks" x:Name="btnPick3" Style="{StaticResource DiscordButtonStyle}" Width="80" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPick3_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- Slot 4: Canvas Top = 402px (315 + 87) -->
+                <Border Canvas.Top="402" Canvas.Left="8" Width="222" Height="81" Background="#2B2D31" CornerRadius="6" Padding="6 4">
+                    <Grid>
+                        <TextBlock x:Name="lblSummonerName4" Text="Summoner 5" Foreground="#DBDEE1" FontSize="11" FontWeight="Medium" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0 0 85 0"/>
+                        <Button Content="Swap Picks" x:Name="btnPick4" Style="{StaticResource DiscordButtonStyle}" Width="80" Height="26" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnPick4_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- Swap Status Text Output -->
+                <TextBlock Canvas.Top="487" Canvas.Left="8" Width="222" Text="" x:Name="txtSwapStatus" Foreground="#5865F2" FontSize="11" FontWeight="SemiBold" TextAlignment="Center" TextWrapping="Wrap"/>
+            </Canvas>
         </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label  Content="Summoner Name 2" x:Name="lblSummonerName1" Grid.Column="0" Margin="10 2 5 2"/>
-            <Button Content="Swap Picks"      x:Name="btnPick1"         Grid.Column="1" Margin="5 2 5 2"     Click="btnPick1_Click"/>
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label  Content="Summoner Name 3" x:Name="lblSummonerName2" Grid.Column="0" Margin="10 2 5 2"/>
-            <Button Content="Swap Picks"      x:Name="btnPick2"         Grid.Column="1" Margin="5 2 5 2"     Click="btnPick2_Click"/>
-           
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label  Content="Summoner Name 4" x:Name="lblSummonerName3" Grid.Column="0" Margin="10 2 5 2"/>
-            <Button Content="Swap Picks"      x:Name="btnPick3"         Grid.Column="1" Margin="5 2 5 2"     Click="btnPick3_Click"/>
-        </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label  Content="Summoner Name 5" x:Name="lblSummonerName4" Grid.Column="0" Margin="10 2 5 10"/>
-            <Button Content="Swap Picks"      x:Name="btnPick4"         Grid.Column="1" Margin="5 2 5 10"     Click="btnPick4_Click"/>
-        </Grid>
-        <TextBlock Text="" x:Name="txtSwapStatus" HorizontalAlignment="Center" TextWrapping="Wrap" Margin="10 0 10 10"/>
-    </StackPanel>
+    </Border>
 </Window>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -18,6 +18,7 @@ namespace LeagueClassicPickSwapper {
         public static Team Team { get; private set; }
         public static ChampSelect? champSelect { get; private set; }
         public static List<AvailableSwap>? AvailableSwaps { get; set; }
+        public static nint GetHookedProcessMainWindowHandle => lcu != null && lcu.IsConnected ? lcu.GetHookedProcessMainWindowHandle : nint.Zero;
 
         public static void Innit() {
             var connectionAssurerTask = RunConnectionAssurerTask();
@@ -37,8 +38,8 @@ namespace LeagueClassicPickSwapper {
         public static Task RunLobbyStatusTask() => Task.Run(async () => {
             while (true) {
                 if (IsConnected) {
-                    var response = await lcu.RequestAsync("/lol-champ-select/v1/session");
                     try {
+                        var response = await lcu.RequestAsync("/lol-champ-select/v1/session");
                         champSelect = JsonConvert.DeserializeObject<ChampSelect>(response);
                         if(champSelect?.actions == null) throw new Exception("Champ select actions is null");
                         Myteam? selfSummoner = JsonConvert.DeserializeObject<Myteam>(await lcu.RequestAsync("/lol-champ-select/v1/session/my-selection"));
