@@ -1,4 +1,4 @@
-# League Classic Pick Swapper
+# <img src="assets/icon.png" width="32" valign="middle"/> League Classic Pick Swapper
 
 [![Framework](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat&logo=dotnet)](https://dotnet.microsoft.com/)
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?style=flat&logo=windows)](https://www.microsoft.com/windows)

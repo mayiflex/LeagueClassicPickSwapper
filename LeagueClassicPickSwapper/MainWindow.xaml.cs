@@ -21,6 +21,7 @@ namespace LeagueClassicPickSwapper {
         private (TextBlock, Button)[] summonerElements = new (TextBlock, Button)[5];
         private System.Windows.Threading.DispatcherTimer? windowTrackerTimer;
         private bool wasClientMinimized = false;
+        private bool isFirstTrackingTick = true;
 
         [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
         private struct RECT {
@@ -70,10 +71,18 @@ namespace LeagueClassicPickSwapper {
             nint handle = LCU_Handler.GetHookedProcessMainWindowHandle;
             if (handle == nint.Zero || !IsWindow(handle)) {
                 wasClientMinimized = false;
+                isFirstTrackingTick = false;
                 return;
             }
 
             bool isClientMinimized = IsIconic(handle);
+
+            if (isFirstTrackingTick) {
+                isFirstTrackingTick = false;
+                wasClientMinimized = isClientMinimized;
+                // If League Client was ALREADY minimized when Pick Swapper launched, do not auto-minimize Pick Swapper
+                if (isClientMinimized) return;
+            }
 
             if (isClientMinimized) {
                 if (!wasClientMinimized) {
