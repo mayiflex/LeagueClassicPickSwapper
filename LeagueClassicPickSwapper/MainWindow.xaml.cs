@@ -20,6 +20,7 @@ namespace LeagueClassicPickSwapper {
     public partial class MainWindow : Window {
         private (TextBlock, Button)[] summonerElements = new (TextBlock, Button)[5];
         private System.Windows.Threading.DispatcherTimer? windowTrackerTimer;
+        private bool wasClientMinimized = false;
 
         [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
         private struct RECT {
@@ -67,15 +68,28 @@ namespace LeagueClassicPickSwapper {
 
         private void WindowTrackerTimer_Tick(object? sender, EventArgs e) {
             nint handle = LCU_Handler.GetHookedProcessMainWindowHandle;
-            if (handle == nint.Zero || !IsWindow(handle)) return;
+            if (handle == nint.Zero || !IsWindow(handle)) {
+                wasClientMinimized = false;
+                return;
+            }
 
-            if (IsIconic(handle)) {
-                if (this.WindowState != WindowState.Minimized) {
+            bool isClientMinimized = IsIconic(handle);
+
+            if (isClientMinimized) {
+                if (!wasClientMinimized) {
+                    wasClientMinimized = true;
                     this.WindowState = WindowState.Minimized;
                 }
+                // When client is minimized, allow user to restore Pick Swapper from taskbar and drag freely
                 return;
-            } else if (this.WindowState == WindowState.Minimized && LCU_Handler.IsInChampSelect) {
-                this.WindowState = WindowState.Normal;
+            }
+
+            // Client is restored / active
+            if (wasClientMinimized) {
+                wasClientMinimized = false;
+                if (this.WindowState == WindowState.Minimized) {
+                    this.WindowState = WindowState.Normal;
+                }
             }
 
             if (!GetWindowRect(handle, out RECT rect)) return;
